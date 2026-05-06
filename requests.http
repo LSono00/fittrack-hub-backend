@@ -1,0 +1,127 @@
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+  "username": "logan3",
+  "email": "logan3@example.com",
+  "password": "mypassword123"
+}
+
+###
+
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "logan3@example.com",
+  "password": "mypassword123"
+}
+
+### Protected route
+GET http://localhost:5000/protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+### Create workout
+POST http://localhost:5000/workouts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+Content-Type: application/json
+
+{
+  "workout_name": "Chest Day",
+  "description": "Bench press, incline dumbbells, cable flys"
+}
+
+### Get workouts
+GET http://localhost:5000/workouts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+### Update workout
+PUT http://localhost:5000/workouts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+Content-Type: application/json
+
+{
+  "workout_name": "Updated Chest Day",
+  "description": "Bench press, dips, flys"
+}
+
+### Delete workout
+DELETE http://localhost:5000/workouts/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+### Create exercise
+POST http://localhost:5000/exercises
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+Content-Type: application/json
+
+{
+  "workout_id": 1,
+  "exercise_name": "Bench Press",
+  "sets": 4,
+  "reps": 8,
+  "weight": 185,
+  "notes": "Felt strong today"
+}
+
+### Get exercises for workout
+GET http://localhost:5000/exercises/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+### Update exercise
+PUT http://localhost:5000/exercises/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+Content-Type: application/json
+
+{
+  "exercise_name": "Incline Bench Press",
+  "sets": 4,
+  "reps": 10,
+  "weight": 155,
+  "notes": "Good pump"
+}
+
+### Delete exercise
+DELETE http://localhost:5000/exercises/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+### Create log entry
+POST http://localhost:5000/exercise-logs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+Content-Type: application/json
+
+{
+  "exercise_id": 2,
+  "sets": 4,
+  "reps": 8,
+  "weight": 185,
+  "notes": "Felt strong today"
+}
+
+### Get logs for an exercise
+GET http://localhost:5000/exercise-logs/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+
+### Delete log entry
+DELETE http://localhost:5000/exercise-logs/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+
+
+### Create or update profile
+POST http://localhost:5000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
+Content-Type: application/json
+
+{
+  "height_cm": 180,
+  "weight_kg": 82.5,
+  "age": 24,
+  "gender": "male",
+  "fitness_goal": "Build muscle",
+  "activity_level": "Moderate",
+  "bio": "Trying to get stronger every day."
+}
+
+### Get Profile
+GET http://localhost:5000/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJ1c2VybmFtZSI6ImxvZ2FuMyIsImlhdCI6MTc3ODA0NTg0NiwiZXhwIjoxNzc4MDQ5NDQ2fQ.QaDu_qIWtEYhGcmtjUROqaV57gtQV1X3asgP4W156Vk
