@@ -1,17 +1,16 @@
 const express = require('express');
 const db = require('../config/db');
-const authenticateToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// CREATE WORKOUT
-router.post('/', authenticateToken, async (req, res) => {
+// CREATE WORKOUT (public)
+router.post('/', async (req, res) => {
   try {
     const { workout_name, description } = req.body;
 
     const [result] = await db.query(
       'INSERT INTO workouts (user_id, workout_name, description) VALUES (?, ?, ?)',
-      [req.user.user_id, workout_name, description]
+      [1, workout_name, description] // default user_id = 1
     );
 
     res.json({ message: 'Workout created', workout_id: result.insertId });
@@ -22,14 +21,10 @@ router.post('/', authenticateToken, async (req, res) => {
   }
 });
 
-// GET ALL WORKOUTS FOR LOGGED-IN USER
-router.get('/', authenticateToken, async (req, res) => {
+// GET ALL WORKOUTS (public)
+router.get('/', async (req, res) => {
   try {
-    const [rows] = await db.query(
-      'SELECT * FROM workouts WHERE user_id = ?',
-      [req.user.user_id]
-    );
-
+    const [rows] = await db.query('SELECT * FROM workouts');
     res.json(rows);
 
   } catch (error) {
@@ -38,14 +33,14 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// UPDATE WORKOUT
-router.put('/:id', authenticateToken, async (req, res) => {
+// UPDATE WORKOUT (public)
+router.put('/:id', async (req, res) => {
   try {
     const { workout_name, description } = req.body;
 
     await db.query(
-      'UPDATE workouts SET workout_name = ?, description = ? WHERE workout_id = ? AND user_id = ?',
-      [workout_name, description, req.params.id, req.user.user_id]
+      'UPDATE workouts SET workout_name = ?, description = ? WHERE workout_id = ?',
+      [workout_name, description, req.params.id]
     );
 
     res.json({ message: 'Workout updated' });
@@ -56,12 +51,12 @@ router.put('/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// DELETE WORKOUT
-router.delete('/:id', authenticateToken, async (req, res) => {
+// DELETE WORKOUT (public)
+router.delete('/:id', async (req, res) => {
   try {
     await db.query(
-      'DELETE FROM workouts WHERE workout_id = ? AND user_id = ?',
-      [req.params.id, req.user.user_id]
+      'DELETE FROM workouts WHERE workout_id = ?',
+      [req.params.id]
     );
 
     res.json({ message: 'Workout deleted' });

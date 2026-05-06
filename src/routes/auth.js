@@ -32,6 +32,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
+
 // LOGIN USER
 router.post('/login', async (req, res) => {
   try {
@@ -80,3 +81,4 @@ router.get('/test', (req, res) => {
 });
 
 module.exports = router;
+
